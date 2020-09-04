@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fa="clr-namespace:FontAwesome"
+             mc:Ignorable="d"
+             x:Class="RealEstateApp.PropertyDetailPage"
+             Title="{Binding Property.Address}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="EditProperty_Clicked"  Text="Edit" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <Grid Padding="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.Row="0"
+                Margin="-10,-10,-10,0"
+                Aspect="AspectFill"
+                HeightRequest="225"
+                Source="{Binding Property.MainImageUrl}" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="16"
+                LineBreakMode="NoWrap"
+                Style="{DynamicResource ListItemTextStyle}"
+                Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
+            <Label
+                Grid.Row="2"
+                FontSize="16"
+                LineBreakMode="NoWrap"
+                Style="{DynamicResource ListItemDetailTextStyle}"
+                Text="{Binding Property.Address}" />
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    FontSize="16"
+                    FontFamily="FA-solid"
+                    Text="{Static fa:IconFont.Bed}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="16"
+                    Text="{Binding Property.Beds}" />
+                <Label
+                    Grid.Column="2"
+                    FontSize="16"
+                    FontFamily="FA-solid"
+                    Text="{Static fa:IconFont.Bath}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    FontSize="16"
+                    Text="{Binding Property.Baths}" />
+                <Label
+                    Grid.Column="4"
+                    FontSize="16"
+                    FontFamily="FA-solid"
+                    Text="{Static fa:IconFont.Parking}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="5"
+                    FontSize="16"
+                    Text="{Binding Property.Parking}" />
+            </Grid>
+            <Label
+                Grid.Row="4"
+                FontSize="14"
+                Text="{Binding Property.LandSize, StringFormat='Land size: {0} &#x33a1;'}" />
+            <Label
+                Grid.Row="5"
+                Margin="0,20,0,0"
+                FontAttributes="Bold"
+                FontSize="14"
+                Text="Description:" />
+            <Label
+                Grid.Row="6"
+                Margin="0,0,0,20"
+                FontSize="14"
+                Text="{Binding Property.Description}" />
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" x:Name="SpeechButton" FontFamily="FA-solid" Style="{StaticResource PlaySpeechButtonStyle}"  Clicked="SpeechButton_Clicked" HorizontalOptions="Start"></Button>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Pitch"></Label>
+                    <Slider Grid.Column="1" Grid.Row="0" x:Name="PitchSlider" Minimum="0" Maximum="20" Value="10" ValueChanged="PitchSlider_ValueChanged"></Slider>
+
+                    <Label Grid.Column="0" Grid.Row="1" Text="Volume"></Label>
+                    <Slider Grid.Column="1" Grid.Row="1" x:Name="VolumeSlider" Minimum="0" Maximum="10" Value="5" ValueChanged="VolumeSlider_ValueChanged"></Slider>
+                </Grid>
+                
+                
+            </Grid>
+
+            <Grid Grid.Row="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label FontFamily="FA-solid" Text="Vendor:" Grid.Row="0"></Label>
+                <Label FontFamily="FA-solid" Grid.Row="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static fa:IconFont.User}"/>
+                            <Span Text=" "/>
+                            <Span Text="{Binding Property.Vendor.FullName}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="FA-solid" Grid.Row="2" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapEmail_Tapped" />
+                    </Label.GestureRecognizers>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static fa:IconFont.Envelope}" />
+                            <Span Text=" " />
+                            <Span Text="{Binding Property.Vendor.Email}" Style="{StaticResource ClickableLabelStyle}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontFamily="FA-solid" Grid.Row="3">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapPhone_Tapped" />
+                    </Label.GestureRecognizers>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Static fa:IconFont.Phone}" />
+                            <Span Text=" " />
+                            <Span Text="{Binding Property.Vendor.Phone}"  Style="{StaticResource ClickableLabelStyle}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+            </Grid>
+            
+            <Label
+                Grid.Row="9"
+                FontAttributes="Bold"
+                FontSize="14"
+                Text="Listed by:" />
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Column="0"
+                    Source="{Binding Agent.ImageUrl}"
+                    VerticalOptions="Start"
+                    WidthRequest="100" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="{Binding Agent.Name}" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="12"
+                        Text="{Binding Agent.Email}" />
+                    <Label
+                        Grid.Row="2"
+                        FontSize="12"
+                        Text="{Binding Agent.Phone}" />
+                </Grid>
+            </Grid>
+
+            <StackLayout Grid.Row="11">
+                <Label Text="Maps" Style="{StaticResource HeaderLabelStyle}"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Destination" Grid.Row="0"></Label>
+                    <Button x:Name="OpenDestinationButton" Grid.Row="0" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.MapMarkedAlt}" Clicked="OpenDestinationButton_Clicked"></Button>
+
+                    <Label Text="Navigation" Grid.Row="1"></Label>
+                    <Button x:Name="OpenNavigationButton" Grid.Row="1" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.Directions}" Clicked="OpenNavigationButton_Clicked"></Button>
+                </Grid>
+
+
+                <Label Text="Browser" Style="{StaticResource HeaderLabelStyle}"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Browser" Grid.Row="0"></Label>
+                    <Button x:Name="OpenBrowserButton" Grid.Row="0" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.Link}" Clicked="OpenBrowserButton_Clicked"></Button>
+
+                    <Label Text="Browser Outside" Grid.Row="1"></Label>
+                    <Button x:Name="OpenBrowserOutsideButton" Grid.Row="1" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.ExternalLinkAlt}" Clicked="OpenBrowserOutsideButton_Clicked"></Button>
+
+                    <Label Text="Open Pdf" Grid.Row="2"></Label>
+                    <Button x:Name="OpenPDFButton" Grid.Row="2" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.FileSignature}" Clicked="OpenPDFButton_Clicked"></Button>
+                </Grid>
+
+                <Label Text="Share" Style="{StaticResource HeaderLabelStyle}"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Share" Grid.Row="0"></Label>
+                    <Button x:Name="ShareTextButton" Grid.Row="0" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.ShareAlt}" Clicked="ShareTextButton_Clicked"></Button>
+
+                    <Label Text="Share File" Grid.Row="1"></Label>
+                    <Button x:Name="ShareFileButton" Grid.Row="1" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.ShareSquare}" Clicked="ShareFileButton_Clicked"></Button>
+
+                    <Label Text="Copy" Grid.Row="2"></Label>
+                    <Button x:Name="CopyToClipboardButton" Grid.Row="2" Grid.Column="1" FontFamily="FA-solid" Text="{Static fa:IconFont.Clipboard}" Clicked="CopyToClipboardButton_Clicked"></Button>
+                </Grid>
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

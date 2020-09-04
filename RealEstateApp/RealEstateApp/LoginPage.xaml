@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fa="clr-namespace:FontAwesome"
+             x:Class="RealEstateApp.LoginPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="Center">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label Text="Username: " Grid.Column="0" Style="{StaticResource BasicLabelAlignment}"></Label>
+                <Entry x:Name="EntryUsername" Placeholder="Username" Grid.Column="1"></Entry>
+
+            </Grid>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Password: " Grid.Column="0" Style="{StaticResource BasicLabelAlignment}"></Label>
+                <Entry x:Name="EntryPassword" Placeholder="Passowrd" Grid.Column="1"></Entry>
+            </Grid>
+
+            <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked" TextColor="White" BackgroundColor="{StaticResource NavigationPrimary}" VerticalOptions="Start" HorizontalOptions="Center"></Button>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
